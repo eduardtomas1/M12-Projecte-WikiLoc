@@ -10,9 +10,6 @@ package wikilocmilabd;
  */
 public class WikiLocMilaBD {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         
     }
