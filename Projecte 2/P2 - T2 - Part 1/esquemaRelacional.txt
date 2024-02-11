@@ -1,0 +1,39 @@
+Client(#client_id, nom+, telefon+, NIF+)
+
+Vehicle(#vehicle_id, num_llicencia+, 
+	marca_model, kilometers, client_id+)
+- client_id+ es FK referencia a Client(client_id)
+
+Mecanic(#mechanic_id, name+, especialitat+)
+
+Reparacio(#reparacio_id, descripcio+, vehicle_id+, 
+	data_entrada+, status_reparacio+, hores_dedicades+)
+- vehicle_id+ es FK referencia a Vehicle(vehicle_id)
+
+Reparacio_Mecanic(#reparacio_mecanic_id, reparacio_id+, mechanic_id+)
+- reparacio_id+ es FK referencia a Reparacio(reparacio_id)
+- mechanic_id+ es FK referencia a Mecanic(mechanic_id)
+
+Linies(#linies_id, reparacio_id+, tipus_linia+)
+- reparacio_id+ es FK referencia a Reparacio(reparacio_id)
+
+-- Subclasses of Linies (Specialization)
+Linies_Feines_Realitzades(#linies_id+, hores+)
+- linies_id+ es FK referencia a Linies(linies_id)
+
+Linies_Peces_Recanvi(#linies_id+, descripcio_peca+, 
+	codi_fabricant, preu_unitari+, unitats_usades+)
+- linies_id+ es FK referencia a Linies(linies_id)
+
+Linies_Packs(#linies_id+, descripcio_pack+, preu_fix+)
+- linies_id+ es FK referencia a Linies(linies_id)
+
+Altres_Conceptes(#linies_id+, descripcio_concepte+, preu+)
+- linies_id+ es FK referencia a Linies(linies_id)
+
+Factura(#factura_id, reparacio_id+, data_generacio+, 
+	num_factura+, base_imposable+, tipus_IVA+, cost_mao_obra+, total_amb_IVA+, estat_pagament+)
+- reparacio_id+ es FK referencia a Reparacio(reparacio_id)
+
+Descomptes(#descompte_id, linies_id+, descripcio+, quantitat_descompte+)
+- linies_id+ es FK referencia a Linies(linies_id)
