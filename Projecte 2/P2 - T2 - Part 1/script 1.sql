@@ -149,15 +149,3 @@ CREATE INDEX idx_descomptes_linies_id ON Descomptes(linies_id);
 
 --------------------------------------------------------------------------------
 
-INSERT INTO Client (client_id, nom, telefon, NIF) VALUES 
-('1', 'Joan Martínez', '612345678', '12345678A'),
-('2', 'Anna Soler', '655432198', '98765432B'),
-('3', 'Marc López', '689012345', '54321098C'),
-('4', 'Laura Torres', '666555444', '87654321D'),
-('5', 'Carles Gómez', '633221100', '13579246E'),
-('6', 'Eva Roca', '677889900', '24681357F'),
-('7', 'Pau Costa', '644332211', '36925814G'),
-('8', 'Marta Puig', '699887766', '58246137H'),
-('9', 'Alex Sánchez', '688999000', '71428536I'),
-('10', 'Laia Fernández', '611223344', '93716485J');
-
