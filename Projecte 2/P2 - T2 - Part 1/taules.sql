@@ -1,44 +1,44 @@
 CREATE TABLE Client
 (
   client_id VARCHAR(25) PRIMARY KEY,
-  nom VARCHAR(25),
-  telefon VARCHAR(9),
-  NIF VARCHAR(9)
+  nom VARCHAR(25) NOT NULL,
+  telefon VARCHAR(9) NOT NULL,
+  NIF VARCHAR(9) NOT NULL
 );
 
 CREATE TABLE Vehicle
 (
   vehicle_id VARCHAR(25) PRIMARY KEY,
-  num_llicencia VARCHAR(7),
-  marca_model VARCHAR(255),
-  kilometers INT,
-  client_id VARCHAR(25),
+  num_llicencia VARCHAR(7) NOT NULL,
+  marca_model VARCHAR(255) NOT NULL,
+  kilometers INT NOT NULL,
+  client_id VARCHAR(25) NOT NULL,
   FOREIGN KEY (client_id) REFERENCES Client(client_id)
 );
 
 CREATE TABLE Mecanic
 (
   mechanic_id VARCHAR(25) PRIMARY KEY,
-  name VARCHAR(25),
-  especialitat VARCHAR(25)
+  name VARCHAR(25) NOT NULL,
+  especialitat VARCHAR(25) NOT NULL
 );
 
 CREATE TABLE Reparacio
 (
   reparacio_id VARCHAR(25) PRIMARY KEY,
-  descripcio VARCHAR(255),
-  vehicle_id VARCHAR(25),
-  data_entrada DATE,
-  status_reparacio VARCHAR(25),
-  hores_dedicades INT,
+  descripcio VARCHAR(255) NOT NULL,
+  vehicle_id VARCHAR(25) NOT NULL,
+  data_entrada DATE NOT NULL,
+  status_reparacio VARCHAR(25) NOT NULL,
+  hores_dedicades INT NOT NULL,
   FOREIGN KEY (vehicle_id) REFERENCES Vehicle(vehicle_id)
 );
 
 CREATE TABLE Reparacio_Mecanic
 (
   reparacio_mecanic_id VARCHAR(25) PRIMARY KEY,
-  reparacio_id VARCHAR(25),
-  mechanic_id VARCHAR(25),
+  reparacio_id VARCHAR(25) NOT NULL,
+  mechanic_id VARCHAR(25) NOT NULL,
   FOREIGN KEY (reparacio_id) REFERENCES Reparacio(reparacio_id),
   FOREIGN KEY (mechanic_id) REFERENCES Mecanic(mechanic_id)
 );
@@ -46,44 +46,44 @@ CREATE TABLE Reparacio_Mecanic
 CREATE TABLE Linies
 (
   linies_id VARCHAR(25) PRIMARY KEY,
-  reparacio_id VARCHAR(25),
-  tipus_linia VARCHAR(50),
+  reparacio_id VARCHAR(25) NOT NULL,
+  tipus_linia VARCHAR(50) NOT NULL,
   FOREIGN KEY (reparacio_id) REFERENCES Reparacio(reparacio_id)
 );
 
 CREATE TABLE Linies_Feines_Realitzades
 (
-  linies_id VARCHAR(25),
-  hores INT,
+  linies_id VARCHAR(25) NOT NULL,
+  hores INT NOT NULL,
   PRIMARY KEY (linies_id),
   FOREIGN KEY (linies_id) REFERENCES Linies(linies_id)
 );
 
 CREATE TABLE Linies_Peces_Recanvi
 (
-  linies_id VARCHAR(25),
-  descripcio_peca VARCHAR(255),
-  codi_fabricant VARCHAR(50),
-  preu_unitari DECIMAL(10,2),
-  unitats_usades INT,
+  linies_id VARCHAR(25) NOT NULL,
+  descripcio_peca VARCHAR(255) NOT NULL,
+  codi_fabricant VARCHAR(50) NOT NULL,
+  preu_unitari DECIMAL(10,2) NOT NULL,
+  unitats_usades INT NOT NULL,
   PRIMARY KEY (linies_id),
   FOREIGN KEY (linies_id) REFERENCES Linies(linies_id)
 );
 
 CREATE TABLE Linies_Packs
 (
-  linies_id VARCHAR(25),
-  descripcio_pack VARCHAR(255),
-  preu_fix DECIMAL(10,2),
+  linies_id VARCHAR(25) NOT NULL,
+  descripcio_pack VARCHAR(255) NOT NULL,
+  preu_fix DECIMAL(10,2) NOT NULL,
   PRIMARY KEY (linies_id),
   FOREIGN KEY (linies_id) REFERENCES Linies(linies_id)
 );
 
 CREATE TABLE Altres_Conceptes
 (
-  linies_id VARCHAR(25),
-  descripcio_concepte VARCHAR(255),
-  preu DECIMAL(10,2),
+  linies_id VARCHAR(25) NOT NULL,
+  descripcio_concepte VARCHAR(255) NOT NULL,
+  preu DECIMAL(10,2) NOT NULL,
   PRIMARY KEY (linies_id),
   FOREIGN KEY (linies_id) REFERENCES Linies(linies_id)
 );
@@ -91,23 +91,23 @@ CREATE TABLE Altres_Conceptes
 CREATE TABLE Factura
 (
   factura_id VARCHAR(25) PRIMARY KEY,
-  reparacio_id VARCHAR(25),
-  data_generacio DATE,
-  num_factura VARCHAR(50),
-  base_imposable DECIMAL(10,2),
-  tipus_IVA VARCHAR(25),
-  cost_ma_obra DECIMAL(10,2),
-  total_amb_IVA DECIMAL(10,2),
-  estat_pagament VARCHAR(25),
+  reparacio_id VARCHAR(25) NOT NULL,
+  data_generacio DATE NOT NULL,
+  num_factura VARCHAR(50) NOT NULL,
+  base_imposable DECIMAL(10,2) NOT NULL,
+  tipus_IVA VARCHAR(25) NOT NULL,
+  cost_ma_obra DECIMAL(10,2) NOT NULL,
+  total_amb_IVA DECIMAL(10,2) NOT NULL,
+  estat_pagament VARCHAR(25) NOT NULL,
   FOREIGN KEY (reparacio_id) REFERENCES Reparacio(reparacio_id)
 );
 
 CREATE TABLE Descomptes
 (
   descompte_id VARCHAR(25) PRIMARY KEY,
-  linies_id VARCHAR(25),
-  descripcio VARCHAR(255),
-  quantitat_descompte DECIMAL(10,2),
+  linies_id VARCHAR(25) NOT NULL,
+  descripcio VARCHAR(255) NOT NULL,
+  quantitat_descompte DECIMAL(10,2) NOT NULL,
   FOREIGN KEY (linies_id) REFERENCES Linies(linies_id)
 );
 
