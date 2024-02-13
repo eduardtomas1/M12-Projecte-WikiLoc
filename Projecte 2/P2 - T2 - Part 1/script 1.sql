@@ -6,14 +6,21 @@ CREATE TABLE Client
   NIF VARCHAR(9) NOT NULL
 );
 
+CREATE TABLE Marca_model
+(
+  marca_model_id PRIMARY KEY,
+  marca_model VARCHAR(255) NOT NULL UNIQUE
+);
+
 CREATE TABLE Vehicle
 (
   vehicle_id VARCHAR(25) PRIMARY KEY,
   num_llicencia VARCHAR(7) NOT NULL,
-  marca_model VARCHAR(255) NOT NULL,
+  marca_model_id VARCHAR(255) NOT NULL,
   kilometers INT NOT NULL,
   client_id VARCHAR(25) NOT NULL,
-  FOREIGN KEY (client_id) REFERENCES Client(client_id)
+  FOREIGN KEY (client_id) REFERENCES Client(client_id),
+  FOREIGN KEY (marca_model_id) REFERENCES Marca_model(marca_model_id)
 );
 
 CREATE TABLE Mecanic
